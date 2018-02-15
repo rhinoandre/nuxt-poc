@@ -14,16 +14,8 @@
 <script>
 import Todo from '@/components/Todo'
 export default {
-    asyncData: () => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => resolve({
-          todos: [
-            { id: 1, done: false, label: 'Do the dishes' },
-            { id: 2, done: false, label: 'Clean my house' },
-            { id: 3, done: false, label: 'Love my wife' }
-          ]
-        }), 3000);
-      })
+    asyncData: (context) => {
+      return context.state.dispatch('getTodos');
     },
     components: {
         Todo
