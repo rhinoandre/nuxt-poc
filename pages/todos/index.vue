@@ -3,9 +3,9 @@
     <button class="btn btn-large">+</button>
     <section class="todos">
         <ul>
-            <Todo :todo="{ id: 1, done: false, label: 'Do the dishes' }" />
-            <Todo :todo="{ id: 2, done: false, label: 'Clean my house' }" />
-            <Todo :todo="{ id: 3, done: false, label: 'Love my wife' }" />
+            <Todo v-for="todo in todos"
+              :key="todo.id"
+              :todo="todo" />
         </ul>
     </section>
 </div>
@@ -14,13 +14,17 @@
 <script>
 import Todo from '@/components/Todo'
 export default {
-    data: () => (
-        {
-            list1: false,
-            list2: false,
-            list3: false
-        }
-    ),
+    asyncData: () => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => resolve({
+          todos: [
+            { id: 1, done: false, label: 'Do the dishes' },
+            { id: 2, done: false, label: 'Clean my house' },
+            { id: 3, done: false, label: 'Love my wife' }
+          ]
+        }), 3000);
+      })
+    },
     components: {
         Todo
     }
