@@ -6,11 +6,11 @@ const createStore = () => {
       todos: []
     },
     mutations: {
-      setTodos(state) {
-        state.todos = [].concat(state.todos);
+      setTodos(state, todos) {
+        state.todos = [].concat(todos);
       },
       getTodo(state, id) {
-        return [].concat(state.todos.find(todo => todo.id === id));
+        return Object.assign({}, state.todos.find(todo => todo.id === id));
       },
       saveTodo(state, todo) {
         state.todos.push(Object.assign({}, todo));
@@ -25,11 +25,13 @@ const createStore = () => {
               { id: 2, done: false, label: 'Clean my house' },
               { id: 3, done: false, label: 'Love my wife' }
             ];
-            resolve({ todos });
             commit('setTodos', todos);
+            resolve({ todos: todos });
           }, 3000);
         });
       }
     }
   });
 };
+
+export default createStore;

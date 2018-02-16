@@ -14,8 +14,8 @@
 <script>
 import Todo from '@/components/Todo'
 export default {
-    asyncData: (context) => {
-      return context.state.dispatch('getTodos');
+    asyncData ({ store }) {
+      return store.dispatch('getTodos')
     },
     components: {
         Todo
